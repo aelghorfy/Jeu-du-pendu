@@ -6,6 +6,7 @@ let longueur = mot_a_trouver.length;
 let erreurs_commises = 0;
 let erreurs_autorisees = 10;
 let mot_trouve = [];
+let lettres_essayees = [];
 
 for (let i = 0; i < longueur; i++) {
     mot_trouve[i] = "_";
@@ -19,7 +20,10 @@ function afficherPotence(erreurs) {
 function mettreAJourAffichage() {
     const motAffiche = document.getElementById("motAffiche");
     motAffiche.textContent = "Mot à deviner : " + mot_trouve.join(" ");
-    console.log("le mot est :" + mot_a_trouver)
+    console.log("le mot est :" + mot_a_trouver);
+    
+ 
+    document.getElementById("lettresEssayees").textContent = lettres_essayees.join(", ");
 }
 
 function verifierFinDeJeu() {
@@ -28,7 +32,7 @@ function verifierFinDeJeu() {
         return true;
     } else if (erreurs_commises >= erreurs_autorisees) {
         console.log("Perdu ! Le mot était : " + mot_a_trouver);
-        document.getElementById("perdu").innerHTML = `Tu as perdu ! le mot à trouver était "${mot_a_trouver}"`;
+        document.getElementById("perdu").innerHTML = `Tu as perdu ! Le mot à trouver était "${mot_a_trouver}"`;
         return true;
     }
     return false;
@@ -40,32 +44,37 @@ document.getElementById("lettre").addEventListener("input", () => {
     lettreInput.value = '';
 
     if (lettre.length === 1) {
-        let lettre_trouvee = false;
-        for (let i = 0; i < longueur; i++) {
-            if (mot_a_trouver[i] === lettre) {
-                mot_trouve[i] = lettre;
-                lettre_trouvee = true;
+       
+        if (!lettres_essayees.includes(lettre)) {
+            lettres_essayees.push(lettre); 
+
+            let lettre_trouvee = false;
+            for (let i = 0; i < longueur; i++) {
+                if (mot_a_trouver[i] === lettre) {
+                    mot_trouve[i] = lettre;
+                    lettre_trouvee = true;
+                }
             }
-        }
 
-        if (!lettre_trouvee) {
-            erreurs_commises++;
-            console.log("Mauvaise lettre. Nombre d'erreurs : " + erreurs_commises);
+            if (!lettre_trouvee) {
+                erreurs_commises++;
+                console.log("Mauvaise lettre. Nombre d'erreurs : " + erreurs_commises);
+            } else {
+                console.log("Bonne lettre !");
+            }
+
+            mettreAJourAffichage();
+            afficherPotence(erreurs_commises);
+
         } else {
-            console.log("Bonne lettre !");
-
+            document.getElementById("Lde").innerHTML = `Lettre déjà essayer ! ` + lettre;
         }
-        mettreAJourAffichage();
-        afficherPotence(erreurs_commises); 
-        
 
-        } if (verifierFinDeJeu()) {
+        if (verifierFinDeJeu()) {
             lettreInput.disabled = true;
             return;
+        }
     }
-
-
 });
-
 
 mettreAJourAffichage();
