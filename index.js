@@ -6,6 +6,7 @@ let longueur = mot_a_trouver.length;
 let erreurs_commises = 0;
 let erreurs_autorisees = 10;
 let mot_trouve = [];
+
 for (let i = 0; i < longueur; i++) {
     mot_trouve[i] = "_";
 }
