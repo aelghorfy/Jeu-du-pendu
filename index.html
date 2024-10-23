@@ -1,16 +1,20 @@
 <!DOCTYPE html>
-
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Jeu du pendu</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        
-        <script src="index.js"></script>
-    </body>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu du Pendu</title>
+</head>
+<body>
+    <h1>Jeu du Pendu</h1>
+    <img id="potence" src="image/pendu0.png" alt="Potence">
+    <div>
+        <label for="lettre">Proposez une lettre :</label>
+        <input type="text" id="lettre" maxlength="1">
+    </div>
+    <div id="perdu"></div>
+    <div id="gagner"></div>
+    <div id="motAffiche"></div>
+    <script src="index.js"></script>
+</body>
 </html>
